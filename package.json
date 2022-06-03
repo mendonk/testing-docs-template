@@ -1,0 +1,41 @@
+{
+  "name": "astra-docs",
+  "scripts": {
+    "build:prod:classic": "npm run build:restapi && npm run build:restapiv1 && npm run build:docapi && npm run build:devopsapi && npm run build:publish:classic",
+    "build:prod:serverless": "npm run build:restapi && npm run build:restapiv1 && npm run build:docapi && npm run build:devopsapi && npm run build:publish:serverless",
+    "build:prod:ad4d": "npm run build:restapi && npm run build:restapiv1 && npm run build:docapi && npm run build:devopsapi && npm run build:publish:ad4d",
+    "build:prodlint": "npm run build:oaslinter && npm run build:prod",
+    "build:dev-classic": "npm run build:restapi && npm run build:docapi && npm run build:devopsapi && npm run build:local:classic",
+    "build:dev-serverless": "npm run build:restapi && npm run build:docapi && npm run build:devopsapi && npm run build:local:serverless",
+    "build:dev-ad4d": "npm run build:restapi && npm run build:docapi && npm run build:devopsapi && npm run build:localad4d",
+    "build:publish:classic": "antora --fetch --clean playbooks/site-publish-classic.yaml",
+    "build:local:classic": "antora --log-level error --stacktrace --fetch --clean playbooks/site-local-classic.yaml",
+    "build:local:classicsg": "antora --log-level error --stacktrace --fetch --clean playbooks/site-local-classic-with-sg.yaml",
+    "build:local:serverless": "antora --log-level error --stacktrace --fetch --clean playbooks/site-local-serverless.yaml",
+    "build:local:serverlesssg": "antora --log-level error --stacktrace --fetch --clean playbooks/site-local-serverless-with-sg.yaml",
+    "build:local:ad4d": "antora --log-level error --stacktrace --fetch --clean playbooks/site-local-ad4d.yaml",
+    "build:oaslinter": "npx @redocly/openapi-cli lint api/StargateRESTv2.yaml && npx @redocly/openapi-cli lint api/StargateRESTv1.yaml && npx @redocly/openapi-cli lint api/StargateDocv2.yaml && npx @redocly/openapi-cli lint api/DevOpsv2.yaml",
+    "build:restapi": "redoc-cli bundle api/StargateRESTv2.yaml --output docs-src/astra-core/modules/ROOT/attachments/restv2.html",
+    "build:restapiv1": "redoc-cli bundle api/StargateRESTv1.yaml --output docs-src/astra-core/modules/ROOT/attachments/restv1.html",
+    "build:docapi": "npx redoc-cli bundle api/StargateDocv2.yaml --output docs-src/astra-core/modules/ROOT/attachments/docv2.html",
+    "build:devopsapi": "redoc-cli bundle api/DevOpsv2.yaml --output docs-src/astra-core/modules/ROOT/attachments/devopsv2.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riptano/astra-docs.git"
+  },
+  "dependencies": {
+    "@antora/cli": "^3.0.1",
+    "@antora/site-generator-default": "^3.0.1",
+    "@openapitools/openapi-generator-cli": "^2.4.26",
+    "antora": "^3.0.1",
+    "mobx": "^6.3.12",
+    "openapi-generator": "^0.1.39",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "redoc": "^2.0.0-rc.70",
+    "redoc-cli": "^0.13.14",
+    "rxjs": "7.0.1",
+    "styled-components": "^5.1.1"
+  }
+}
